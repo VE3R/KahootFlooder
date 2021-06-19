@@ -3,9 +3,9 @@ from threading import Thread
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-numberOfBots = 25
-baseName = 'Bot'
-gamePin = '635746'
+numberOfBots = int(input("Number of bots: "))
+baseName = input("Name of bots: ")
+gamePin = int(input("Your game pin: "))
 
 delayBeforeLeaving = 20
 delayBetweenActions = 2.5
@@ -24,13 +24,13 @@ def createBot(pin, name):
     
     sleep(delayBetweenActions)
     
-    browser.find_element_by_css_selector('#inputSession').send_keys(pin)
-    browser.find_element_by_css_selector('.btn-greyscale').click()
+    browser.find_element_by_name("gameId").send_keys(pin)
+    browser.find_element_by_xpath("""//*[@id="root"]/div[1]/div/main/div[2]/main/div/form/button""").click()
     
     sleep(delayBetweenActions)
     
-    browser.find_element_by_css_selector('#username').send_keys((u'\u200b').join(name))
-    browser.find_element_by_css_selector('.btn-greyscale').click()
+    browser.find_element_by_name('nickname').send_keys((u'\u200b').join(name))
+    browser.find_element_by_xpath("""//*[@id="root"]/div[1]/div/main/div[2]/main/div/form/button""").click()
 
     sleep(delayBeforeLeaving)
 
